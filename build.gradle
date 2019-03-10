@@ -1,11 +1,3 @@
-apply plugin: 'java'
-apply plugin: 'maven'
-apply plugin: 'io.quarkus.gradle.plugin'
-
-group 'quarkus-gradle'
-version '1.0-SNAPSHOT'
-
-sourceCompatibility = 1.8
 
 buildscript {
 
@@ -21,6 +13,15 @@ buildscript {
     }
 }
 
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'io.quarkus.gradle.plugin'
+
+group 'quarkus-gradle'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
 repositories {
     mavenCentral()
     maven {
@@ -30,6 +31,10 @@ repositories {
 
 dependencies {
     implementation group: 'io.quarkus', name: 'quarkus-resteasy', version:'0.11.0'
+
+    // Kotlin support
+    implementation 'io.quarkus:quarkus-kotlin:0.11.0'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.21'
 
     testImplementation group: 'io.quarkus', name: 'quarkus-junit5', version:'0.11.0'
     testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '3.3.0'
