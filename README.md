@@ -25,6 +25,6 @@ hello fabri
 ```
 
 ## Useful links
-[Quarkus project](https://quarkus.io/)
-[Quarkus Gradle tooling](https://quarkus.io/guides/gradle-tooling)
-[Using Quarkus with Kotlin](https://quarkus.io/guides/kotlin)
+* [Quarkus project](https://quarkus.io/)
+* [Quarkus Gradle tooling](https://quarkus.io/guides/gradle-tooling)
+* [Using Quarkus with Kotlin](https://quarkus.io/guides/kotlin)
