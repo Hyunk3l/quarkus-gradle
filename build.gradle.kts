@@ -1,9 +1,7 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
-    java
+    kotlin("jvm") version "1.5.30"
+    kotlin("plugin.allopen") version "1.5.30"
     id("io.quarkus")
-    kotlin("jvm") version "1.5.31"
 }
 
 repositories {
@@ -15,34 +13,32 @@ val quarkusPlatformGroupId: String by project
 val quarkusPlatformArtifactId: String by project
 val quarkusPlatformVersion: String by project
 
-group = "quarkus-gradle"
-version = "0.0.1-SNAPSHOT"
-
-java.sourceCompatibility = JavaVersion.VERSION_11
-
-repositories {
-    mavenCentral()
-    mavenLocal()
-}
-
 dependencies {
-    implementation("io.quarkus:quarkus-resteasy:0.11.0")
-
-    // Kotlin support
-    implementation("io.quarkus:quarkus-kotlin:0.11.0")
-    implementation("io.quarkus:quarkus-arc:0.11.0")
-    implementation("io.quarkus:quarkus-gradle-plugin:0.11.0")
+    implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
+    implementation("io.quarkus:quarkus-rest-client")
+    implementation("io.quarkus:quarkus-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.21")
-    implementation("org.jetbrains.kotlin:kotlin-allopen:1.3.21")
-    implementation("org.jetbrains.intellij.deps:trove4j:1.0.20181211")
-    implementation("org.jetbrains.kotlin:kotlin-script-runtime:1.3.21")
-
-    testImplementation("io.quarkus:quarkus-junit5:0.11.0")
-    testImplementation("io.rest-assured:rest-assured:3.3.0")
+    implementation("io.quarkus:quarkus-arc")
+    implementation("io.quarkus:quarkus-resteasy")
+    testImplementation("io.quarkus:quarkus-junit5")
+    testImplementation("io.rest-assured:rest-assured")
 }
 
-quarkus {
-    setSourceDir("src/main/kotlin")
-    setOutputDirectory("build/classes/kotlin/main")
+group = "quarkus-gradle"
+version = "1.0.0-SNAPSHOT"
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+allOpen {
+    annotation("javax.ws.rs.Path")
+    annotation("javax.enterprise.context.ApplicationScoped")
+    annotation("io.quarkus.test.junit.QuarkusTest")
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
+    kotlinOptions.javaParameters = true
 }
