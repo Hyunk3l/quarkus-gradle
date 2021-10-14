@@ -5,7 +5,7 @@ A simple hello world using Quarkus + Gradle.
 ## How to run
 Run this command in your terminal to run the application:
 ```
-./gradlew quarkus-dev
+./gradlew quarkusDev
 ```
 
 ## Using Hello World
